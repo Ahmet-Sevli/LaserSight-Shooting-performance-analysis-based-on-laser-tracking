@@ -1,0 +1,22 @@
+// Tetik butonunun bağlı olduğu pin
+const int buttonPin = D1; 
+
+void setup() {
+  // Python koduyla haberleşmek için seri portu başlatıyoruz. 
+  Serial.begin(9600); 
+  
+  pinMode(buttonPin, INPUT_PULLUP); 
+}
+
+void loop() {
+  // Butona basıldığında akım GND'ye gideceği için değer LOW olur
+  if (digitalRead(buttonPin) == LOW) { 
+    
+    // Bilgisayara (Python koduna) tetik mesajını gönder
+    Serial.println("TETIK");
+    
+    // Debounce: Butona bir kere basıldığında mekanik titreşimden dolayı 
+    // arka arkaya 10 defa basılmış gibi algılanmasını önlemek için yarım saniye bekle.
+    delay(500); 
+  }
+}
